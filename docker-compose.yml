@@ -64,3 +64,36 @@ volumes:
     - ./dags:/opt/airflow/dags
     - ./logs:/opt/airflow/logs
   command: webserver
+
+
+
+  fb3087f4b326
+*** Found logs served from host http://fb3087f4b326:8793/log/dag_id=iris_classification/run_id=manual__2025-05-13T23:20:23+00:00/task_id=load_and_split_data/attempt=1.log
+[2025-05-13, 23:20:41 UTC] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: iris_classification.load_and_split_data manual__2025-05-13T23:20:23+00:00 [queued]>
+[2025-05-13, 23:20:41 UTC] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: iris_classification.load_and_split_data manual__2025-05-13T23:20:23+00:00 [queued]>
+[2025-05-13, 23:20:41 UTC] {taskinstance.py:1361} INFO - Starting attempt 1 of 1
+[2025-05-13, 23:20:41 UTC] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_and_split_data> on 2025-05-13 23:20:23+00:00
+[2025-05-13, 23:20:41 UTC] {standard_task_runner.py:57} INFO - Started process 240 to run task
+[2025-05-13, 23:20:41 UTC] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'iris_classification', 'load_and_split_data', 'manual__2025-05-13T23:20:23+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/classification_dag.py', '--cfg-path', '/tmp/tmpnlzkgah1']
+[2025-05-13, 23:20:41 UTC] {standard_task_runner.py:85} INFO - Job 3: Subtask load_and_split_data
+[2025-05-13, 23:20:41 UTC] {logging_mixin.py:154} WARNING - /home/***/.local/lib/python3.8/site-packages/***/settings.py:195 DeprecationWarning: The sql_alchemy_conn option in [core] has been moved to the sql_alchemy_conn option in [database] - the old setting has been used, but please update your config.
+[2025-05-13, 23:20:41 UTC] {task_command.py:416} INFO - Running <TaskInstance: iris_classification.load_and_split_data manual__2025-05-13T23:20:23+00:00 [running]> on host fb3087f4b326
+[2025-05-13, 23:20:41 UTC] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='iris_classification' AIRFLOW_CTX_TASK_ID='load_and_split_data' AIRFLOW_CTX_EXECUTION_DATE='2025-05-13T23:20:23+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-05-13T23:20:23+00:00'
+[2025-05-13, 23:20:42 UTC] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/classification_dag.py", line 25, in load_and_split
+    X_train, X_test, y_train, y_test = train_test_split(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sklearn/utils/_param_validation.py", line 204, in wrapper
+    validate_parameter_constraints(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sklearn/utils/_param_validation.py", line 96, in validate_parameter_constraints
+    raise InvalidParameterError(
+sklearn.utils._param_validation.InvalidParameterError: The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got '0.2' instead.
+[2025-05-13, 23:20:42 UTC] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=iris_classification, task_id=load_and_split_data, execution_date=20250513T232023, start_date=20250513T232041, end_date=20250513T232042
+[2025-05-13, 23:20:42 UTC] {standard_task_runner.py:104} ERROR - Failed to execute job 3 for task load_and_split_data (The 'test_size' parameter of train_test_split must be a float in the range (0.0, 1.0), an int in the range [1, inf) or None. Got '0.2' instead.; 240)
+[2025-05-13, 23:20:42 UTC] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-05-13, 23:20:42 UTC] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
+
